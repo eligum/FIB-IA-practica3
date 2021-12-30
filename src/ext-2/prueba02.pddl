@@ -19,5 +19,5 @@
         (forall (?p - peticion) (servida ?p)))
 
     (:metric minimize
-        (+ (* 1.0 (n-denegadas)) (* 0.5 (n-orientadas)) )))
+        (+ (* 1.0 (n-denegadas)) (* 0.5 (n-orientadas))))
 )

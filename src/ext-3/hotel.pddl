@@ -18,6 +18,7 @@
         (capacidad ?h - habitacion)
         (n-denegadas)
         (n-orientadas)
+        (n-sobrantes)
     )
 
     (:action asignar
@@ -44,6 +45,7 @@
                                    (and (orientada ?pet ?dir)
                                         (orientada ?hab ?dir))))
                     (increase (n-orientadas) 1))
+                (increase (n-sobrantes) (- (capacidad ?hab) (capacidad ?pet)))
             )
     )
 
