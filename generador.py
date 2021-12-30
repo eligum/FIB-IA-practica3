@@ -43,7 +43,7 @@ def main():
     p_dirs = random.choices(['N', 'S', 'E', 'O'], k=n_pet)
     h_dirs = random.choices(['N', 'S', 'E', 'O'], k=n_hab)
     dis = [random.randrange(1, 30) for _ in range(n_pet)]
-    dfs = [random.randrange(di, 31) for di in dis]
+    dfs = [random.randrange(di+1, 31) for di in dis]
 
     peticiones = list(zip(cantidades, dis, dfs, p_dirs))
     habitaciones = list(zip(capacidades, h_dirs))
@@ -62,13 +62,13 @@ def main():
         fid.write("    (:domain ReservasHotel)\n")
         fid.write("    (:objects\n")
         fid.write("       ")
-        for i in range(n_hab):
-            fid.write(f" hab{i + 1}")
-        fid.write(" - habitacion\n")
-        fid.write("       ")
         for i in range(n_pet):
             fid.write(f" pet{i + 1}")
         fid.write(" - peticion\n")
+        fid.write("       ")
+        for i in range(n_hab):
+            fid.write(f" hab{i + 1}")
+        fid.write(" - habitacion\n")
         fid.write("       ")
         for c in "NSEO":
             fid.write(f" {c}")
@@ -77,13 +77,16 @@ def main():
         fid.write("    (:init\n")
         for (i, (c, di, df, o)) in enumerate(peticiones):
             fid.write("        ")
-            fid.write(f"(= (cantidad pet{i+1}) {c}) (= (dia-inicio pet{i+1}) {di}) (= (dia-final pet{i+1}) {df}) (prefiere pet{i+1} {o})\n")
+            fid.write(f"(= (cantidad pet{i+1}) {c}) (= (dia-inicio pet{i+1}) {di}) (= (dia-final pet{i+1}) {df}) (orientada pet{i+1} {o})\n")
         for (i, (c, o)) in enumerate(habitaciones):
             fid.write("        ")
             fid.write(f"(= (capacidad hab{i+1}) {c}) (orientada hab{i+1} {o})\n")
         fid.write("    )\n")
         fid.write("    (:goal\n")
-        fid.write("        (forall (?p - peticion) (servida ?p))))\n")
+        fid.write("        (forall (?p - peticion) (servida ?p)))\n\n")
+        fid.write("    (:metric minimize\n")
+        fid.write("        (- (* 1.0 (n-denegadas)) (* 1.0 (n-orientadas))))\n")
+        fid.write(")\n")
 
 
 if __name__ == "__main__":

@@ -15,6 +15,7 @@
         (dia-final ?p - peticion)
         (cantidad ?p - peticion)
         (capacidad ?hab - habitacion)
+        (n-denegadas)
     )
 
     (:action asignar
@@ -37,6 +38,16 @@
             (and
                 (servida ?pet)
                 (asignada-a ?pet ?hab)
+            )
+    )
+
+    (:action denegar
+        :parameters (?pet - peticion)
+        :precondition (not (servida ?pet))
+        :effect
+            (and
+                (servida ?pet)
+                (increase (n-denegadas) 1)
             )
     )
 )
