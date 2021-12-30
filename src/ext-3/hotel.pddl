@@ -45,7 +45,7 @@
                                    (and (orientada ?pet ?dir)
                                         (orientada ?hab ?dir))))
                     (increase (n-orientadas) 1))
-                (increase (n-sobrantes) (- (capacidad ?hab) (capacidad ?pet)))
+                (increase (n-sobrantes) (- (capacidad ?hab) (cantidad ?pet)))
             )
     )
 
