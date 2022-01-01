@@ -1,7 +1,7 @@
 # Practica 3 IA - reservas hotel
 Explicado en el informe.
 
-# Generadores
+## Generadores
 Hay un generador para las extensiones 2, 3 y 4. Permiten crear fácilmente entradas aleatorias especificando el número de peticiones y habitaciones que se desea.
 
 Por ejemplo:
@@ -16,6 +16,7 @@ Genera un fichero de problema con 10 peticiones y 4 habitaciones a partir de la 
 
 * Compilamos el código del directorio Metric-FF (make). Ésto creará el ejecutable "ff".
 * Ejecutamos en la consola:
+
  ```sh
  ./ff -O -o reservas.pddl -f prueba02.pddl
  ```
