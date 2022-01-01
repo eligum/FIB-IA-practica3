@@ -3,12 +3,11 @@
 (define (domain ReservasHotel)
     (:requirements :adl :typing :equality :fluents)
     (:types
-        peticion habitacion direccion - object)
+        peticion habitacion - object)
 
     (:predicates
         (servida ?p - peticion)
         (asignada-a ?p - peticion ?h - habitacion)
-        (orientada ?obj - object ?d - direccion)
     )
 
     (:functions
@@ -17,7 +16,6 @@
         (cantidad ?p - peticion)
         (capacidad ?h - habitacion)
         (n-denegadas)
-        (n-norientadas)
         (n-sobrantes)
     )
 
@@ -41,10 +39,10 @@
             (and
                 (servida ?pet)
                 (asignada-a ?pet ?hab)
-                (when (not (exists (?dir - direccion)
-                                   (and (orientada ?pet ?dir)
-                                        (orientada ?hab ?dir))))
-                    (increase (n-norientadas) 1))
+                ; (when (not (exists (?dir - direccion)
+                ;                    (and (orientada ?pet ?dir)
+                ;                         (orientada ?hab ?dir))))
+                ;     (increase (n-norientadas) 1))
                 (increase (n-sobrantes) (- (capacidad ?hab) (cantidad ?pet)))
             )
     )

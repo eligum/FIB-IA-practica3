@@ -19,7 +19,7 @@ def main():
                         default=None,
                         help="sleccionar la semilla que se usa para generar los valores aleatorios")
 
-    parser.add_argument("-o", "--out",
+    parser.add_argument("-o",
                         action="store",
                         type=str,
                         default="test04",
@@ -41,19 +41,19 @@ def main():
     n_pet = args.pet
     n_hab = args.hab
     seed = args.seed
-    fname = args.out
+    fname = args.o
 
     # Generate random values for peticiones and habitaciones
     random.seed(seed)
     cantidades = [random.randrange(1, 5) for _ in range(n_pet)]
     capacidades = [max(cantidades)] + [random.randrange(1, 5) for _ in range(n_hab - 1)]
-    p_dirs = random.choices(['N', 'S', 'E', 'O'], k=n_pet)
-    h_dirs = random.choices(['N', 'S', 'E', 'O'], k=n_hab)
+    # p_dirs = random.choices(['N', 'S', 'E', 'O'], k=n_pet)
+    # h_dirs = random.choices(['N', 'S', 'E', 'O'], k=n_hab)
     dis = [random.randrange(1, 30) for _ in range(n_pet)]
     dfs = [random.randrange(di+1, 31) for di in dis]
 
-    peticiones = list(zip(cantidades, dis, dfs, p_dirs))
-    habitaciones = list(zip(capacidades, h_dirs))
+    peticiones = list(zip(cantidades, dis, dfs))
+    habitaciones = list(zip(capacidades))
 
     print(peticiones)
     print(habitaciones)
@@ -81,16 +81,14 @@ def main():
         fid.write(" - direccion)\n")
         # Inicializar objetos
         fid.write("    (:init\n")
-        for (i, (c, di, df, o)) in enumerate(peticiones):
+        for (i, (c, di, df)) in enumerate(peticiones):
             fid.write("        ")
-            fid.write(f"(= (cantidad pet{i+1}) {c}) (= (dia-inicio pet{i+1}) {di}) (= (dia-final pet{i+1}) {df}) (orientada pet{i+1} {o})\n")
-        for (i, (c, o)) in enumerate(habitaciones):
+            fid.write(f"(= (cantidad pet{i+1}) {c}) (= (dia-inicio pet{i+1}) {di}) (= (dia-final pet{i+1}) {df})\n")
+        for (i, (c,)) in enumerate(habitaciones):
             fid.write("        ")
-            fid.write(f"(= (capacidad hab{i+1}) {c}) (orientada hab{i+1} {o})\n")
+            fid.write(f"(= (capacidad hab{i+1}) {c})\n")
         fid.write("        ")
         fid.write("(= (n-denegadas) 0)\n")
-        fid.write("        ")
-        fid.write("(= (n-norientadas) 0)\n")
         fid.write("        ")
         fid.write("(= (n-sobrantes) 0)\n")
         fid.write("        ")
@@ -98,7 +96,7 @@ def main():
         fid.write("    (:goal\n")
         fid.write("        (forall (?p - peticion) (servida ?p)))\n\n")
         fid.write("    (:metric minimize\n")
-        fid.write("        (+ (* 10.0 (n-denegadas)) (+ (* 0.5 (n-norientadas)) (+ (* 0.25 (n-sobrantes)) (* 0.1 (n-abiertas))))))\n")
+        fid.write("        (+ (* 2.0 (n-denegadas)) (+ (* 0.5 (n-norientadas)) (+ (* 0.25 (n-sobrantes)) (* 0.1 (n-abiertas))))))\n")
         fid.write(")\n")
 
 

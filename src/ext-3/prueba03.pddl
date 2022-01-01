@@ -1,24 +1,22 @@
-(define (problem prueba03)
+(define (problem test03)
     (:domain ReservasHotel)
     (:objects
-        pet1 pet2 pet3 pet4 - peticion
-        hab1 hab2 hab3 - habitacion
-        N S E O - direccion)
+        pet1 pet2 pet3 - peticion
+        hab1 hab2 hab3 hab4 hab5 - habitacion)
     (:init
-        (= (cantidad pet1) 4) (= (dia-inicio pet1) 15) (= (dia-final pet1) 27) (orientada pet1 N)
-        (= (cantidad pet2) 1) (= (dia-inicio pet2) 5) (= (dia-final pet2) 9) (orientada pet2 S)
-        (= (cantidad pet3) 1) (= (dia-inicio pet3) 3) (= (dia-final pet3) 4) (orientada pet3 N)
-        (= (cantidad pet4) 1) (= (dia-inicio pet4) 6) (= (dia-final pet4) 23) (orientada pet4 O)
-        (= (capacidad hab1) 4) (orientada hab1 N)
-        (= (capacidad hab2) 1) (orientada hab2 E)
-        (= (capacidad hab3) 1) (orientada hab3 S)
+        (= (cantidad pet1) 1) (= (dia-inicio pet1) 5) (= (dia-final pet1) 12)
+        (= (cantidad pet2) 2) (= (dia-inicio pet2) 9) (= (dia-final pet2) 20)
+        (= (cantidad pet3) 1) (= (dia-inicio pet3) 8) (= (dia-final pet3) 27)
+        (= (capacidad hab1) 1)
+        (= (capacidad hab2) 2)
+        (= (capacidad hab3) 3)
+        (= (capacidad hab4) 4)
+        (= (capacidad hab5) 2)
         (= (n-denegadas) 0)
-        (= (n-norientadas) 0)
-        (= (n-sobrantes) 0)
-    )
+        (= (n-sobrantes) 0))
     (:goal
         (forall (?p - peticion) (servida ?p)))
 
     (:metric minimize
-        (+ (* 1.0 (n-denegadas)) (+ (* 0.5 (n-norientadas)) (* 0.25 (n-sobrantes))))
+        (+ (* 1.0 (n-denegadas)) (* 0.25 (n-sobrantes))))
 )
