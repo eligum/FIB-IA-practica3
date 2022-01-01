@@ -19,6 +19,12 @@ def main():
                         default=None,
                         help="sleccionar la semilla que se usa para generar los valores aleatorios")
 
+    parser.add_argument("-o", "--out",
+                        action="store",
+                        type=str,
+                        default="test04",
+                        help="nombre del archivo de salida, se añade la extension '.pddl' automaticamente" )
+
     parser.add_argument("--pet",
                         action="store",
                         type=int,
@@ -35,6 +41,7 @@ def main():
     n_pet = args.pet
     n_hab = args.hab
     seed = args.seed
+    fname = args.out
 
     # Generate random values for peticiones and habitaciones
     random.seed(seed)
@@ -56,7 +63,6 @@ def main():
         sys.exit()
 
     # Actual application code
-    fname = "test02"
     with open(f"{fname}.pddl", mode='w') as fid:
         fid.write(f"(define (problem {fname})\n")
         fid.write("    (:domain ReservasHotel)\n")
@@ -81,11 +87,18 @@ def main():
         for (i, (c, o)) in enumerate(habitaciones):
             fid.write("        ")
             fid.write(f"(= (capacidad hab{i+1}) {c}) (orientada hab{i+1} {o})\n")
-        fid.write("    )\n")
+        fid.write("        ")
+        fid.write("(= (n-denegadas) 0)\n")
+        fid.write("        ")
+        fid.write("(= (n-orientadas) 0)\n")
+        fid.write("        ")
+        fid.write("(= (n-sobrantes) 0)\n")
+        fid.write("        ")
+        fid.write("(= (n-abiertas) 0))\n")
         fid.write("    (:goal\n")
         fid.write("        (forall (?p - peticion) (servida ?p)))\n\n")
         fid.write("    (:metric minimize\n")
-        fid.write("        (- (* 1.0 (n-denegadas)) (* 1.0 (n-orientadas))))\n")
+        fid.write("        (+ (* 10.0 (n-denegadas)) (+ (* 0.5 (n-orientadas)) (+ (* 0.25 (n-sobrantes)) (* 0.1 (n-abiertas))))))\n")
         fid.write(")\n")
 
 

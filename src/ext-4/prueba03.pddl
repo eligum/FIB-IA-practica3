@@ -14,7 +14,6 @@
         (= (capacidad hab3) 1) (orientada hab3 S)
         (= (n-denegadas) 0)
         (= (n-orientadas) 0)
-        (= (n-sobrantes) 0)
     )
     (:goal
         (forall (?p - peticion) (servida ?p)))
