@@ -12,7 +12,7 @@ python gen-e2.py -s 1234 --pet 10 --hab 4
 
 Genera un fichero de problema con 10 peticiones y 4 habitaciones a partir de la semilla 1234.
 
-## Cómo ejecutar los planificadores (Hay que usar Metric-FF):
+## Cómo ejecutar el planificador (Hay que usar Metric-FF):
 
 * Compilamos el código del directorio Metric-FF (make). Ésto creará el ejecutable "ff".
 * Ejecutamos en la consola:
