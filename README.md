@@ -14,7 +14,7 @@ Genera un fichero de problema con 10 peticiones y 4 habitaciones a partir de la 
 
 ## Cómo ejecutar el planificador (Hay que usar Metric-FF):
 
-* Compilamos el código del directorio Metric-FF (make). Ésto creará el ejecutable "ff".
+* Compilamos el código del directorio Metric-FF (make). Ésto creará el ejecutable `ff`.
 * Ejecutamos en la consola:
 
  ```sh
