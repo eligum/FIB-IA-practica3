@@ -13,12 +13,12 @@
         (= (capacidad hab2) 1) (orientada hab2 E)
         (= (capacidad hab3) 1) (orientada hab3 S)
         (= (n-denegadas) 0)
-        (= (n-orientadas) 0)
+        (= (n-norientadas) 0)
         (= (n-sobrantes) 0)
     )
     (:goal
         (forall (?p - peticion) (servida ?p)))
 
     (:metric minimize
-        (+ (* 1.0 (n-denegadas)) (+ (* 0.5 (n-orientadas)) (* 0.25 (n-sobrantes))))
+        (+ (* 1.0 (n-denegadas)) (+ (* 0.5 (n-norientadas)) (* 0.25 (n-sobrantes))))
 )

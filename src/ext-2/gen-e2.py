@@ -84,11 +84,11 @@ def main():
         fid.write("        ")
         fid.write("(= (n-denegadas) 0)\n")
         fid.write("        ")
-        fid.write("(= (n-orientadas) 0))\n")
+        fid.write("(= (n-norientadas) 0))\n")
         fid.write("    (:goal\n")
         fid.write("        (forall (?p - peticion) (servida ?p)))\n\n")
         fid.write("    (:metric minimize\n")
-        fid.write("        (+ (* 1.0 (n-denegadas)) (* 0.5 (n-orientadas))))\n")
+        fid.write("        (+ (* 1.0 (n-denegadas)) (* 0.5 (n-norientadas))))\n")
         fid.write(")\n")
 
 

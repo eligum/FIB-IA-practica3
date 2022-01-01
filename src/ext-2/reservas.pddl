@@ -17,7 +17,7 @@
         (cantidad ?p - peticion)
         (capacidad ?h - habitacion)
         (n-denegadas)
-        (n-orientadas)
+        (n-norientadas)
     )
 
     (:action asignar
@@ -43,7 +43,7 @@
                 (when (not (exists (?dir - direccion)
                                    (and (orientada ?pet ?dir)
                                         (orientada ?hab ?dir))))
-                    (increase (n-orientadas) 1))
+                    (increase (n-norientadas) 1))
             )
     )
 
