@@ -47,8 +47,6 @@ def main():
     random.seed(seed)
     cantidades = [random.randrange(1, 5) for _ in range(n_pet)]
     capacidades = [max(cantidades)] + [random.randrange(1, 5) for _ in range(n_hab - 1)]
-    # p_dirs = random.choices(['N', 'S', 'E', 'O'], k=n_pet)
-    # h_dirs = random.choices(['N', 'S', 'E', 'O'], k=n_hab)
     dis = [random.randrange(1, 30) for _ in range(n_pet)]
     dfs = [random.randrange(di+1, 31) for di in dis]
 
@@ -74,11 +72,7 @@ def main():
         fid.write("       ")
         for i in range(n_hab):
             fid.write(f" hab{i + 1}")
-        fid.write(" - habitacion\n")
-        fid.write("       ")
-        for c in "NSEO":
-            fid.write(f" {c}")
-        fid.write(" - direccion)\n")
+        fid.write(" - habitacion)\n")
         # Inicializar objetos
         fid.write("    (:init\n")
         for (i, (c, di, df)) in enumerate(peticiones):
@@ -96,7 +90,7 @@ def main():
         fid.write("    (:goal\n")
         fid.write("        (forall (?p - peticion) (servida ?p)))\n\n")
         fid.write("    (:metric minimize\n")
-        fid.write("        (+ (* 2.0 (n-denegadas)) (+ (* 0.5 (n-norientadas)) (+ (* 0.25 (n-sobrantes)) (* 0.1 (n-abiertas))))))\n")
+        fid.write("        (+ (* 1.5 (n-denegadas)) (+ (* 0.2 (n-sobrantes)) (* 0.5 (n-abiertas)))))\n")
         fid.write(")\n")
 
 
